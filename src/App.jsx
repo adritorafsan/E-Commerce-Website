@@ -4,25 +4,27 @@ import CheckOut from "./Pages/CheckOut"
 import AuthPage from "./Pages/AuthPage"
 import Navbar from "./Components/Navbar"
 import ProductDetails from "./Pages/ProductDetails"
+import CartProvider from "./context/CartContext"
 
 function App() {
 
 
   return (
-    
-      <div>
-        <Navbar />
 
+    <div>
+      <Navbar />
 
+      <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<CheckOut />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
-      </div>
-      
-    
+      </CartProvider>
+    </div>
+
+
   )
 }
 
