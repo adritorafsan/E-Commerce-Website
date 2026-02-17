@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router"
 
 import { useEffect } from "react";
 import { getProductsbyID } from "../Data/Products";
+import { UseCart } from "../context/CartContext";
 
 const ProductDetails = () => {
     const [product, setProduct] = useState(null)
@@ -22,6 +23,10 @@ const ProductDetails = () => {
     if (!product) {
         return <h1>Loading....</h1>
     }
+
+    const {cartitems , AddtoCart} = UseCart();
+    const Incart = cartitems.find((item)=> item.id === product.id)
+
     return (
         <div className="w-full flex justify-center items-center mt-14">
             <div className="w-[60%] flex justify-between bg-gray-200 rounded-xl">
@@ -30,6 +35,9 @@ const ProductDetails = () => {
                     <h1 className="text-center font-semibold text-3xl text-cyan-500 ">{product.name}</h1>
                     <p className="text-lg font-medium text-gray-800">${product.price}</p>
                     <p className="text-lg font-medium text-gray-800 text-center">{product.description}</p>
+                     <button className="text-lg font-medium px-2 py-1.5 rounded-lg text-white bg-cyan-600 cursor-grabbing" onClick={()=>AddtoCart(product.id)}>Add to cart
+                                 {Incart ? ` (${Incart.quantity})`:""}
+                     </button>
                 </div>
             </div>
         </div>
